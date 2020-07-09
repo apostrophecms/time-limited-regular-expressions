@@ -4,7 +4,7 @@
   "description": "Evaluates regular expressions with a time limit to mitigate DOS attacks based on catastrophic backtracking.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "eslint . && mocha"
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,15 @@
     "url": "https://github.com/apostrophecms/time-limited-regular-expressions/issues"
   },
   "homepage": "https://github.com/apostrophecms/time-limited-regular-expressions#readme",
-  "dependencies": {
-    "mocha": "^8.0.1"
-  },
   "devDependencies": {
-    "wtfnode": "^0.8.1"
+    "wtfnode": "^0.8.1",
+    "eslint": "^7.0.0",
+    "eslint-config-apostrophe": "^3.2.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^8.0.1"
   }
 }
