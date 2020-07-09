@@ -1,5 +1,7 @@
 # time-limited-regular-expressions
 
+[![CircleCI](https://circleci.com/gh/apostrophecms/time-limited-regular-expressions/tree/main.svg?style=svg)](https://circleci.com/gh/apostrophecms/time-limited-regular-expressions/tree/main)
+
 ## Why?
 
 You want to let end users enter their own regular expressions. But regular expressions can lead to [catastrophic backtracking](https://medium.com/@nitinpatel_20236/what-are-evil-regexes-7b21058c747e). This can take up hours of CPU time. In Node.js this means no other code can execute. It is a Denial of Service (DOS) attack vector, whether intentionally or by accident.
