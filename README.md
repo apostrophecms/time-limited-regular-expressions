@@ -23,12 +23,14 @@ const evil = '^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(
   // Normal behavior, may be truthy or falsy according to match,
   // returns the same array result as regular regexp match() calls
   console.log(realEmailResult);
+  // This input is long enough to trigger catastrophic backtracking and
+  // could take hours to evaluate
   const evilEmail = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
   try {
     const evilEmailResult = await regExp.match(evil, evilEmail);
     // We will not get here, exception will be thrown
   } catch (e) {
-    console.log(e.name); // Will be 'evilRegExp'
+    console.log(e.name); // Will be 'timeout'
   }
 })();
 ```

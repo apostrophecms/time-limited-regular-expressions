@@ -43,7 +43,7 @@ module.exports = ({ limit = 0.25 } = {}) => {
               worker.kill();
               worker = createWorker();
               const error = new Error(`A user-supplied regular expression took more than ${limit} seconds to evaluate.`);
-              error.name = 'evilRegExp';
+              error.name = 'timeout';
               reject(error);
               settled = true;
               working = false;

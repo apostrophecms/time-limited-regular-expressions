@@ -26,10 +26,10 @@ describe('time limited regular expressions', () => {
     const userDefinedEmail = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
     try {
       const isValid = await regExp.match(evil, userDefinedEmail);
-      // We should not get here at all, we should throw an evilRegExp error
+      // We should not get here at all, we should throw an timeout error
       assert(false);
     } catch (e) {
-      assert(e.name === 'evilRegExp');
+      assert(e.name === 'timeout');
     }
   });
   it('should run the problematic regular expression again on short input', async () => {

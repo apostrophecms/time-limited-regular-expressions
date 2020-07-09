@@ -17,6 +17,6 @@ const evil = '^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(
     const evilEmailResult = await regExp.match(evil, evilEmail);
     // We will not get here, exception will be thrown
   } catch (e) {
-    console.log(e.name); // Will be 'evilRegExp'
+    console.log(e.name); // Will be 'timeout'
   }
 })();
