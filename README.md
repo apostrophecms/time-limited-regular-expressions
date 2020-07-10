@@ -14,7 +14,7 @@ const regExp = require('time-limited-regular-expressions')({ limit: 1 });
 
 // A common email address validator with potentially evil characteristics
 // (catastrophic backtracking)
-const evil = '^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$';
+const evil = /^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$/;
 
 (async () => {
   // Run a potentially slow regular expression on short, matching input
@@ -40,3 +40,7 @@ const evil = '^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(
 "Why is `match` an async function?" It runs in a separate process because that is the only way to avoid starving the Node.js application and implement a portable timeout on the regular expression.
 
 "How bad is the performance overhead?" Communication with a separate worker process makes it slower of course, but the process is reused by later calls, so the hit is not serious.
+
+Flags, for instance the `g` flag, are supported.
+
+You can pass the regular expression as a string, but regular expression literals (what you are used to typing) are easier to get right because you don't have to double-escape anything.

@@ -7,12 +7,23 @@ module.exports = ({ limit = 0.25 } = {}) => {
   process.on('exit', cleanup);
   return {
     match(regExp, string) {
+      let flags;
+      regExp = regExp.toString();
+      // A regexp literal was typically passed and when it went through toString,
+      // it became /regexp-goes-here/flags-go-here. Parse that into a form we
+      // can feed to the RegExp constructor in the other process
+      const matches = regExp.match(/^\/(.*?)\/([a-z]*)$/);
+      if (matches) {
+        regExp = matches[1];
+        flags = matches[2];
+      }
       return new Promise((resolve, reject) => {
         if (!worker) {
           worker = createWorker();
         }
         queue.push({
           regExp,
+          flags,
           string,
           resolve,
           reject
@@ -52,6 +63,7 @@ module.exports = ({ limit = 0.25 } = {}) => {
           }, limit * 1000);
           worker.send({
             regExp,
+            flags,
             string
           });
           function receive(message) {
