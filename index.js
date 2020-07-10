@@ -47,7 +47,9 @@ module.exports = ({ limit = 0.25 } = {}) => {
             return;
           }
           working = true;
-          const { regExp, string, resolve, reject } = queue.shift();
+          const {
+            regExp, string, resolve, reject
+          } = queue.shift();
           worker.once('message', receive);
           const timeout = setTimeout(function() {
             if (!settled) {
@@ -85,4 +87,3 @@ module.exports = ({ limit = 0.25 } = {}) => {
     }
   }
 };
-

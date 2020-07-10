@@ -1,7 +1,7 @@
 const assert = require('assert');
 const regExp = require('../index.js')({ limit: 0.25 });
 // Email address validator with evil characteristics (catastrophic backtracking)
-const evil = /^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$/;
+const evil = /^([a-zA-Z0-9])(([-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$/;
 
 describe('time limited regular expressions', () => {
   it('should process a matching regular expression', async () => {
@@ -32,7 +32,7 @@ describe('time limited regular expressions', () => {
   it('should flunk a problematic regular expression on long input', async () => {
     const userDefinedEmail = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
     try {
-      const isValid = await regExp.match(evil, userDefinedEmail);
+      await regExp.match(evil, userDefinedEmail);
       // We should not get here at all, we should throw an timeout error
       assert(false);
     } catch (e) {
