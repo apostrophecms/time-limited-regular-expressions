@@ -29,11 +29,11 @@ module.exports = ({ limit = 0.25 } = {}) => {
           reject
         });
         if (!working) {
-          one();
+          matchOneViaWorker();
         }
         function createWorker() {
           const worker = cp.fork(`${__dirname}/worker.js`, {
-            stdio: 'inherit' // TODO back to ignore
+            stdio: 'ignore'
           });
           // So the parent process can exit due to a lack of work to do,
           // without explicitly closing the child
@@ -41,7 +41,7 @@ module.exports = ({ limit = 0.25 } = {}) => {
           worker.channel.unref();
           return worker;
         }
-        function one() {
+        function matchOneViaWorker() {
           let settled = false;
           if (!queue.length) {
             return;
@@ -60,7 +60,7 @@ module.exports = ({ limit = 0.25 } = {}) => {
               reject(error);
               settled = true;
               working = false;
-              one();
+              matchOneViaWorker();
             }
           }, limit * 1000);
           worker.send({
@@ -74,7 +74,7 @@ module.exports = ({ limit = 0.25 } = {}) => {
               settled = true;
               working = false;
               resolve(message.result);
-              one();
+              matchOneViaWorker();
             }
           }
         }
