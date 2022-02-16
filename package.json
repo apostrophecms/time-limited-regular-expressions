@@ -1,6 +1,6 @@
 {
   "name": "time-limited-regular-expressions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Evaluates regular expressions with a time limit to mitigate DOS attacks based on catastrophic backtracking.",
   "main": "index.js",
   "scripts": {
